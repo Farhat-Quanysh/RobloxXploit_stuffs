@@ -1,0 +1,1269 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/"))()
+
+local Global = (getgenv and getgenv()) or shared
+if not isfile and isfolder and writefile and (getsynasset or getcustomasset) then
+    warn("Exploit will not run custom songs")
+end
+if isfile and isfolder and writefile and (getsynasset or getcustomasset) and (not isfolder("GelatekHub")) then
+	local Bindable = Instance.new("BindableFunction")
+	local function Copy(e)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/packages/AudioPack.lua"))()
+		Bindable:Destroy()
+	end
+	Bindable.OnInvoke = Copy
+	game.StarterGui:SetCore("SendNotification",{
+		Title = "Audio Package (45 MB) ";
+		Text = "Click here to download audio package for every script automatically, otherwise ignore";
+		Duration = 10;
+		Callback = Bindable,
+		Button1 = "Download Data";
+	})
+end
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/packages/FunctionPack.lua"))()
+Global.GelatekHubConfig = {
+	["Permanent Death"] = false,
+	["Torso Fling"] = false,
+	["Bullet Enabled"] = false,
+	["Enable Collisions"] = false,
+	["Keep Hats On Head"] = false,
+	["Headless On Perma"] = false,
+	["Anti Void"] = false,
+	["Anti Void Offset"] = 75
+}
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/lib/UILibrary.lua"))()
+local Main = Library:Create("krypton gelatek hub fe patchma zendey pendulum deepthroat geecee hub v9999", "tststs", Color3.fromRGB(50, 168, 82))
+local UserInputService = game:GetService("UserInputService")
+if UserInputService.TouchEnabled then
+	game.StarterGui:SetCore("SendNotification",{
+		Title = "MOBILE USER ALERT! ";
+		Text = "This hub was never really meant to support mobile executors for a reasons, check discord for info.";
+		Duration = 5
+	})
+end
+
+local READTHIS = Main:MakeTab("READ THIS PLS")
+do
+	READTHIS:MakeLabel("HATS ARE OPTIONAL!!!!!")
+	READTHIS:MakeLabel("no hats = fake hats")
+	READTHIS:MakeLabel("ppl cant see fake hats")
+	READTHIS:MakeLabel("")
+	READTHIS:MakeLabel("mobile bugs a lot for this hub")
+	READTHIS:MakeLabel("dont expect fixes for mobile execs")
+end
+	
+local Home = Main:MakeTab("Home")
+local Reanimate = Main:MakeTab("Reanimate")
+local FreeScripts = Main:MakeTab("Free Scripts")
+local HatScripts = Main:MakeTab("Hat Scripts")
+local Animations = Main:MakeTab("Animations")
+local Credits = Main:MakeTab("Credits")
+local Hats = Main:MakeTab("Hats")
+Home:MakeLabel("Hello! Thanks for using the hub.")
+Home:MakeButton("Copy Discord Invite", function()
+	setclipboard("https://discord.gg/fx5BszFmMY")
+end)
+
+local function BetterStopScript()
+	StopScript()
+	task.wait(0.25)
+	StopScript()
+end
+
+Reanimate:MakeButton("Reanimate", function()
+-- gelatek hub 1.1 reanim patchfix
+if not replicatesignal then
+	error("no replicatesignal")
+end
+
+-- \\ Krypton Reanimate forked to work with lag hub v9999
+
+
+loadstring(game:HttpGet("https://raw.githubusercontent.com/KadeTheExploiter/Uncategorized-Scripts/main/LoadLib.lua"))()
+
+
+local KryptonSetConfig = KryptonConfiguration or Configuration or {}
+local RigName = KryptonSetConfig.RigName or "GelatekReanimate"
+local WaitTime = KryptonSetConfig.WaitTime or 0.251
+local TeleportOffsetRadius = KryptonSetConfig.TeleportOffsetRadius or 21
+local Flinging = KryptonSetConfig.Flinging or nil
+local NoBodyNearby = KryptonSetConfig.NoBodyNearby or nil
+local AntiVoiding = KryptonSetConfig.AntiVoiding or nil
+local NoCollisions = KryptonSetConfig.NoCollisions or Flinging or nil
+local LimitHatsPerLimb = KryptonSetConfig.LimitHatsPerLimb or nil
+local DisableCharacterScripts = KryptonSetConfig.DisableCharacterScripts or nil
+
+--[[]
+local DefaultHats = {
+	["Right Arm"] = {
+		{Texture = "14255544465", Mesh = "14255522247", Name = "RARM", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "14255543546", Mesh = "14255522247", Name = "RARM", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "4645402630", Mesh = "3030546036", Name = "International Fedora", Offset = CFrame.Angles(math.rad(-90), 0, math.rad(90))}
+	},
+
+	["Left Arm"] = {
+		{Texture = "14255544465", Mesh = "14255522247", Name = "LARM", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "14255543546", Mesh = "14255522247", Name = "LARM", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "3650139425", Mesh = "3030546036", Name = "International Fedora", Offset = CFrame.Angles(math.rad(-90), 0, math.rad(-90))}
+	},
+
+	["Right Leg"] = {
+		{Texture = "17374768001", Mesh = "17374767929", Name = "Accessory (RARM)", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "79186624401216", Mesh = "90736849096372", Name = "Accessory (RARM)", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "4622077774", Mesh = "3030546036", Name = "International Fedora", Offset = CFrame.Angles(math.rad(-90), 0, math.rad(90))}
+	},
+
+	["Left Leg"] = {
+		{Texture = "17374768001", Mesh = "17374767929", Name = "Accessory (LARM)", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "71060417496309", Mesh = "105141400603933", Name = "Accessory (LARM)", Offset = CFrame.Angles(0, 0, math.rad(90))},
+		{Texture = "3860099469", Mesh = "3030546036", Name = "InternationalFedora", Offset = CFrame.Angles(math.rad(-90), 0, math.rad(-90))}
+	},	
+
+	["Torso"] = {
+		{Texture = "13415110780", Mesh = "13421774668", Name = "MeshPartAccessory", Offset = CFrame.identity},
+		{Texture = "14251599953", Mesh = "14241018198", Name = "Black", Offset = CFrame.identity},
+		{Texture = "4819722776", Mesh = "4819720316", Name = "MeshPartAccessory", Offset = CFrame.Angles(0, 0, math.rad(-15))}
+	},
+}
+--]]
+
+local Hats = KryptonSetConfig.Hats or DefaultHats
+
+local IsA = game.IsA
+local Clone = game.Clone
+local FindFirstChildOfClass = game.FindFirstChildOfClass
+local FindFirstChild = game.FindFirstChild
+local WaitForChild = game.WaitForChild
+local GetChildren = game.GetChildren
+local GetDescendants = game.GetDescendants
+
+local RespawnEvent = Instance.new("BindableEvent")
+
+local TeleportOffset = Vector3.zero
+local ReverseSleep = TeleportOffset
+local SafeYAxis = 35
+
+local CameraHandle = nil
+local AnimationHandlingFunction = nil
+
+local HatsWithDifferentAligns = {}
+local FlingableTargets = {}
+local TempSignals = {}
+local RBXSignals = {}
+local Joints = {}
+local Blacklist = {}
+local HatsInUse = {}
+
+
+local Workspace = FindFirstChildOfClass(game, "Workspace")
+local Players = FindFirstChildOfClass(game, "Players")
+local RunService = FindFirstChildOfClass(game, "RunService")
+local StarterGui = FindFirstChildOfClass(game, "StarterGui")
+local UserInputService = FindFirstChildOfClass(game, "UserInputService")
+local TestService = FindFirstChildOfClass(game, "TestService")
+local FakeHats = Instance.new("Folder")
+FakeHats.Name = "FakeHats"
+FakeHats.Parent = TestService
+
+local Camera = Workspace.CurrentCamera
+local PreviousCameraCFrame = Camera.CFrame
+
+local function GetInstanceWithTime(Parent: Instance, Class: string, Name: string | nil, Timeout: number)
+	local CurTime = 0
+
+	while Timeout > CurTime do
+		for _, v in GetChildren(Parent) do
+			if IsA(v, Class) and (not Name or v.Name == Name) then
+				return v
+			end
+		end
+
+		CurTime += task.wait(0)
+	end
+end
+
+if FindFirstChild(Workspace, RigName) then
+	error("Reanimate is already running.", 2)
+	return
+end
+
+if WaitTime < 0.16 then
+	WaitTime = 0
+end
+
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+
+local Character = Player.Character or Player.CharacterAdded:Wait() and Player.Character
+
+local Humanoid = GetInstanceWithTime(Character, "Humanoid", nil, 3)
+local RootPart = GetInstanceWithTime(Character, "Part", "HumanoidRootPart", 3)
+local Descendants = GetDescendants(Character)
+
+local CFrameBackup = AntiVoiding and RootPart.CFrame or CFrame.identity
+local FallenPartsDestroyHeight = Workspace.FallenPartsDestroyHeight + 100
+
+local CanCallSimRadius = KryptonSetConfig.SetSimulationRadius and 
+							pcall(function() Player.SimulationRadius = 1000 end)
+
+-- // RunTime: Creating FakeRig
+
+local FakeRig = Instance.new("Model")
+local FakeHumanoid = Instance.new("Humanoid")
+local FakeRigChildren = {}
+local FakeRoot = nil
+
+local SetStateEnabled = FakeHumanoid.SetStateEnabled
+local ChangeState = FakeHumanoid.ChangeState
+local Move = FakeHumanoid.Move
+
+local BreakJoints = FakeRig.BreakJoints
+local SetCoreGuiEnabled = StarterGui.SetCoreGuiEnabled
+local SetCore = StarterGui.SetCore
+
+getgenv().script = Instance.new("Script")
+getgenv().RealChar = Character
+getgenv().TableOfEvents = TempSignals
+
+local function CancelScript()
+	local RootCFrame = FakeRoot.CFrame
+	
+	local ScriptCheck = FindFirstChild(TestService, "ScriptCheck") 
+	if ScriptCheck then
+		ScriptCheck:Destroy()
+	end
+	
+	replicatesignal(Player, ConnectDiedSignalBackend)
+	
+	task.wait(Player.CharacterAdded:Wait())
+	
+	for _, Signal in RBXSignals do
+		Signal:Disconnect()
+	end
+
+	StarterGui:SetCore("ResetButtonCallback", true)
+	Camera.CameraSubject = Character
+	FakeRig:Destroy()
+
+	-- Free the memory after use.
+
+	table.clear(Hats)
+	table.clear(HatsInUse)
+	table.clear(RBXSignals)
+	table.clear(FakeRigChildren)
+	table.clear(Joints)
+	table.clear(HatsWithDifferentAligns)
+	table.clear(FlingableTargets)
+	table.clear(TempSignals)
+	table.clear(DefaultHats)
+	table.clear(Descendants)
+
+	if KryptonSetConfig.ReturnOnDeath then
+		local Target = Player.CharacterAdded:Wait()
+		local Root = GetInstanceWithTime(Target, "Part", "HumanoidRootPart", 3)
+		
+		if Root then
+			Root.CFrame = RootCFrame
+		end
+	end
+end
+
+do -- [[ Scoped Rig Creating. ]]
+	local Transparency = KryptonSetConfig.OverlayFakeCharacter and 0.5 or 1
+	local HumanoidDesc = Instance.new("HumanoidDescription")
+	local Animator = Instance.new("Animator")
+	local Animate = Instance.new("LocalScript")
+
+	local function MakeMotor6D(Name, Part0, Part1, C0, C1)
+		local Joint = Instance.new("Motor6D")
+
+		Joint.Name = Name
+		Joint.Part0 = Part0
+		Joint.Part1 = Part1
+		Joint.C0 = C0
+		Joint.C1 = C1
+
+		Joint.Parent = Part0
+		Joints[Name] = Joint
+
+		return Joint
+	end
+
+	local function MakeAttachment(Name, CFrame, Parent)
+		local Attachment = Instance.new("Attachment")
+
+		Attachment.Name = Name
+		Attachment.CFrame = CFrame
+		Attachment.Parent = Parent
+	end
+
+	local Torso = Instance.new("Part")
+	local RightArm = Instance.new("Part")
+	local Head = Instance.new("Part")
+	DefaultAccessoryPart1 = Head
+
+	Head.Size = Vector3.new(2, 1, 1)
+	Torso.Size = Vector3.new(2, 2, 1)
+	RightArm.Size = Vector3.new(1, 2, 1)
+
+	Head.Transparency = Transparency
+	Torso.Transparency = Transparency
+	RightArm.Transparency = Transparency
+
+	FakeRoot = Clone(Torso);
+	FakeRoot.CanCollide = nil
+
+	local LeftArm = Clone(RightArm)
+	local RightLeg = Clone(RightArm)
+	local LeftLeg = Clone(RightArm)
+
+	local Motor6Ds = {
+		Neck = {
+			Torso,
+			Head,
+			CFrame.new(0, 1, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0),
+			CFrame.new(0, -0.5, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0)
+		},
+		RootJoint = {
+			FakeRoot,
+			Torso,
+			CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0),
+			CFrame.new(0, 0, 0, -1, 0, 0, 0, 0, 1, 0, 1, -0)
+		},
+		['Right Shoulder'] = {
+			Torso,
+			RightArm,
+			CFrame.new(1, 0.5, 0, 0, 0, 1, 0, 1, -0, -1, 0, 0),
+			CFrame.new(-0.5, 0.5, 0, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+		},
+		['Left Shoulder'] = {
+			Torso,
+			LeftArm,
+			CFrame.new(-1, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+			CFrame.new(0.5, 0.5, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+		},
+		['Right Hip'] = {
+			Torso,
+			RightLeg,
+			CFrame.new(1, -1, 0, 0, 0, 1, 0, 1, -0, -1, 0, 0),
+			CFrame.new(0.5, 1, 0, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+		},
+		['Left Hip'] = {
+			Torso,
+			LeftLeg,
+			CFrame.new(-1, -1, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0),
+			CFrame.new(-0.5, 1, 0, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+		}
+	}
+
+	local Attachments = {
+		HairAttachment = { CFrame.new(0, 0.6, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Head },
+		HatAttachment = { CFrame.new(0, 0.6, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Head },
+		FaceFrontAttachment = { CFrame.new(0, 0, -0.6, 1, 0, 0, 0, 1, 0, 0, 0, 1), Head },
+		RootAttachment = { CFrame.new(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), FakeRoot },
+		LeftShoulderAttachment = { CFrame.new(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), LeftArm },
+		LeftGripAttachment = { CFrame.new(0, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), LeftArm },
+		RightShoulderAttachment = { CFrame.new(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), RightArm },
+		RightGripAttachment = { CFrame.new(0, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), RightArm },
+		LeftFootAttachment = { CFrame.new(0, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), LeftLeg },
+		RightFootAttachment = { CFrame.new(0, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), RightLeg },
+		NeckAttachment = { CFrame.new(0, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		BodyFrontAttachment = { CFrame.new(0, 0, -0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		BodyBackAttachment = { CFrame.new(0, 0, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		LeftCollarAttachment = { CFrame.new(-1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		RightCollarAttachment = { CFrame.new(1, 1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		WaistFrontAttachment = { CFrame.new(0, -1, -0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		WaistCenterAttachment = { CFrame.new(0, -1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+		WaistBackAttachment = { CFrame.new(0, -1, 0.5, 1, 0, 0, 0, 1, 0, 0, 0, 1), Torso },
+	}
+
+	for Name, Value in Motor6Ds do
+		MakeMotor6D(Name, Value[1], Value[2], Value[3], Value[4])	
+	end
+
+	for Name, Table in Attachments do
+		MakeAttachment(Name, Table[1], Table[2])
+	end
+
+	if KryptonSetConfig.AccessoryFallbackDefaults then
+		local Types = { Name = "string", Texture = "string", Mesh = "string", Offset = "CFrame" }
+
+		for Name, Data in DefaultHats do
+			local HatsData = Hats[Name]
+			local Flagged = nil
+
+			if HatsData and typeof(HatsData) == "table" then
+				for _, Hat in HatsData do
+					for Key, Type in Types do
+						if typeof(Hat[Key]) ~= Type then
+							Flagged = true
+							break
+						end
+					end
+				end
+			else
+				Flagged = true
+			end
+
+			if Flagged then
+				Hats[Name] = table.clone(Data)
+			end
+		end
+	end
+
+	table.clear(Attachments)
+	table.clear(Motor6Ds)
+
+	FakeRoot.Name = "HumanoidRootPart"
+	Torso.Name = "Torso"
+	Head.Name = "Head"
+	RightArm.Name = "Right Arm"
+	LeftArm.Name = "Left Arm"
+	RightLeg.Name = "Right Leg"
+	LeftLeg.Name = "Left Leg"
+
+	Animator.Parent = FakeHumanoid
+	HumanoidDesc.Parent = FakeHumanoid
+
+	FakeHumanoid.Parent = FakeRig
+	FakeRoot.Parent = FakeRig
+	Head.Parent = FakeRig
+
+	Torso.Parent = FakeRig
+	RightArm.Parent = FakeRig
+	LeftArm.Parent = FakeRig
+	RightLeg.Parent = FakeRig
+	LeftLeg.Parent = FakeRig
+	FakeHumanoid.Parent = FakeRig
+
+	Animate.Name = "Animate"
+	Animate.Parent = FakeRig
+
+	FakeRig.Name = RigName
+	FakeRig.PrimaryPart = Head
+
+	if FakeRigScale then
+		FakeRig:ScaleTo(FakeRigScale)
+		FakeRoot.CFrame = RootPart.CFrame * CFrame.new(0, FakeRigScale + 0.1, 0)
+	else
+		FakeRoot.CFrame = RootPart.CFrame * CFrame.new(0, 0.1, 0)
+	end
+	
+	Instance.new("Decal",Head).Name = "Face"
+	Instance.new("Pants",FakeRig).Name = "Pants"
+	Instance.new("Shirt",FakeRig).Name = "Shirt"
+	
+	if KryptonSetConfig.Animations then
+		local function AddAnimation(ID)
+			local Animation = Instance.new("Animation")
+			Animation.AnimationId = ID
+			return Animation
+		end
+
+		local AnimationsToggled = true
+		local JumpAnimTime = 0
+
+		local Current = {
+			Speed = 0,
+			Animation = "",
+			Instance = nil,
+			AnimTrack = nil,
+			KeyframeHandler = nil,
+		}
+
+		local AnimationTable = {
+			Idle = AddAnimation("http://www.roblox.com/asset/?id=180435571"),
+			Walk = AddAnimation("http://www.roblox.com/asset/?id=180426354"),
+			Run = AddAnimation("Run.xml"),
+			Jump = AddAnimation("http://www.roblox.com/asset/?id=125750702"),
+			Fall = AddAnimation("http://www.roblox.com/asset/?id=180436148"),
+			Climb = AddAnimation("http://www.roblox.com/asset/?id=180436334"),
+			Sit = AddAnimation("http://www.roblox.com/asset/?id=178130996"),
+
+			dance1 = AddAnimation("http://www.roblox.com/asset/?id=182435998"),
+			dance2 = AddAnimation("http://www.roblox.com/asset/?id=182436842"),
+			dance3 = AddAnimation("http://www.roblox.com/asset/?id=182436935"),
+			wave = AddAnimation("http://www.roblox.com/asset/?id=128777973"),
+			point = AddAnimation("http://www.roblox.com/asset/?dan=128853357"),
+			laugh = AddAnimation("http://www.roblox.com/asset/?id=129423131"),
+			cheer = AddAnimation("http://www.roblox.com/asset/?id=129423030"),
+		}
+
+		local function PlayAnimation(AnimName, TransitionTime)
+			local Anim = AnimationTable[AnimName]
+
+			if Anim ~= Current.Instance then
+				if Current.AnimTrack then
+					Current.AnimTrack:Stop(TransitionTime)
+					Current.AnimTrack:Destroy()
+				end
+
+				Current.Speed = 1.0
+				Current.AnimTrack = FakeHumanoid:LoadAnimation(Anim)
+				Current.AnimTrack.Priority = Enum.AnimationPriority.Core
+				Current.AnimTrack:Play(TransitionTime)
+
+				Current.Animation = AnimName
+				Current.Instance = Anim
+
+				if Current.KeyframeHandler then
+					Current.KeyframeHandler:Disconnect()
+				end
+
+				Current.KeyframeHandler = Current.AnimTrack.KeyframeReached:Connect(function(FrameName)
+					if FrameName == "End" and AnimationTable[Current.Animation] then
+						PlayAnimation("Idle", 0.1)
+					end
+				end)
+			end
+		end
+
+		local function SetAnimationSpeed(Speed)
+			Current.Speed = Speed
+			Current.AnimTrack:AdjustSpeed(Speed)
+		end
+
+		local EventHandlers = {
+			Running = function(Speed)
+				if Speed > 0.01 then
+					PlayAnimation("Walk", 0.1)
+					SetAnimationSpeed(Speed / 14.5)
+				else
+					PlayAnimation("Idle", 0.1)
+				end
+			end,
+
+			Jumping = function()
+				PlayAnimation("Jump", 0.1)
+				JumpAnimTime = 0.3
+			end,
+
+			Climbing = function(Speed)
+				PlayAnimation("Climb", 0.1)
+				SetAnimationSpeed(Speed / 12.0)
+			end,
+
+			FreeFalling = function()
+				if JumpAnimTime <= 0 then
+					PlayAnimation("Fall", 0.3)
+				end
+			end,
+		}
+
+		for EventName, Handler in EventHandlers do
+			FakeHumanoid[EventName]:Connect(function(...)
+				if AnimationsToggled then
+					Handler(...)
+				end
+			end)
+		end
+
+		table.insert(RBXSignals,Player.Chatted:Connect(function(Message)
+			local Context = Message and string.gsub(Message, "/e ", "")
+
+			if AnimationsToggled and AnimationTable[Context] then
+				PlayAnimation(Context, 0.1)
+			end
+		end))
+
+		table.insert(RBXSignals, RunService.PostSimulation:Connect(function(DeltaTime)
+			AnimationsToggled = Animate and Animate.Parent and Animate.Enabled
+			JumpAnimTime = math.max(0, JumpAnimTime - DeltaTime)
+		end))
+	end
+
+	FakeRig.Parent = Workspace
+	FakeRoot.CFrame = RootPart.CFrame
+	ChangeState(FakeHumanoid, Enum.HumanoidStateType.GettingUp)
+	ChangeState(FakeHumanoid, Enum.HumanoidStateType.Landed)
+end
+
+-- // RunTime: Functions
+
+local IsNetworkOwner = isnetworkowner or function(Part): bool
+	return Part and Part.ReceiveAge == 0
+end
+
+local function ExtractNumbers(String: string | number)
+	local ToString = tostring(String)
+	return string.match(ToString, "%d+")
+end
+
+local function GetFirstPart(Parent: Instance) : Part
+	return FindFirstChildOfClass(Parent, "Part") or WaitForChild(Parent, "Handle", 1)
+end
+
+local function GetFirstWeld(Parent: Instance) : Weld
+	return FindFirstChild(Parent, "AccessoryWeld") or FindFirstChildOfClass(Parent, "Weld")
+end
+
+local function DestroyWeld(Parent: Instance)
+	local Weld = GetFirstWeld(Parent)
+
+	if Weld then
+		Weld:Destroy()
+	end
+end
+
+local function ObtainMeshAndTextureOfAccessory(Accessory: Accessory)
+	local Handle = FindFirstChild(Accessory, "Handle")
+	local IfMesh = FindFirstChildOfClass(Handle, "SpecialMesh")
+
+	if IsA(Handle, "MeshPart") then
+		return {MeshId = Handle.MeshId, TextureId = Handle.TextureID}
+
+	elseif IfMesh then
+		return {MeshId = IfMesh.MeshId, TextureId = IfMesh.TextureId}
+	end
+end
+
+local function ExtractNumbers(String: string | number)
+	local ToString = tostring(String)
+	return string.match(ToString, "%d+")
+end
+
+local function FindAccessory(Parent: Instance, Texture: string | number, Mesh: string | number, Name: string)
+	local InputMeshNumber = ExtractNumbers(Mesh)
+	local InputTextureNumber = ExtractNumbers(Texture)
+
+	for _, Accessory in GetChildren(Parent) do
+		if IsA(Accessory, "Accessory") and Accessory.Name == Name then
+			local HatData = ObtainMeshAndTextureOfAccessory(Accessory)
+
+			if HatData then
+				local MeshNumber = ExtractNumbers(HatData.MeshId)
+				local TextureNumber = ExtractNumbers(HatData.TextureId)
+
+				if MeshNumber == InputMeshNumber and TextureNumber == InputTextureNumber then
+					return Accessory
+				end
+			end
+		end
+	end
+end
+
+local function RecreateAccessory(Accessory: Accessory)
+	local FakeAccessory = Clone(Accessory)
+	local FakeHandle = GetFirstPart(FakeAccessory)
+
+	FakeHandle.Transparency = 1
+
+	local FakeAttachment = FindFirstChildOfClass(FakeHandle, "Attachment")
+	local RigAttachment = FindFirstChild(FakeRig, FakeAttachment and FakeAttachment.Name or "", true)
+
+	local FakeHandleWeld = Instance.new("Weld")
+
+	FakeHandleWeld.Name = "AccessoryWeld"
+	FakeHandleWeld.Part0 = FakeHandle
+	FakeHandleWeld.C0 = FakeAttachment.CFrame
+
+	DestroyWeld(FakeHandle)
+
+	if RigAttachment then
+		FakeHandleWeld.C1 = RigAttachment.CFrame
+		FakeHandleWeld.Part1 = RigAttachment.Parent
+	else
+		FakeHandleWeld.Part1 = FindFirstChild(FakeRig, "Head")
+	end
+
+	FakeHandleWeld.Parent = FakeHandle
+	FakeAccessory.Parent = FakeRig
+	
+	FakeAccessory:Clone().Parent = FakeHats
+	
+	return FakeAccessory
+end
+
+local function ProcessAccessory(Accessory: Accessory, Function)
+	if not Accessory or table.find(Blacklist, Accessory) then
+		return
+	end
+
+	table.insert(Blacklist, Accessory)
+
+	local Handle = GetFirstPart(Accessory)
+
+	if Handle and not HatsInUse[Handle] then
+		Function(Handle)
+	end
+end
+
+local function SetUpHatConfig()	
+	for _, Hat in GetDescendants(FakeRig) do
+		if IsA(Hat, "Accessory") then
+			Hat:Destroy()
+		end
+	end
+
+	for _, Value in HatsWithDifferentAligns do
+		local Accessory = FindAccessory(Character, Value[1], Value[2], Value[3])
+
+		ProcessAccessory(Accessory, function(Handle)
+			local Part1 = Value[4]
+
+			if Part1 and Part1.Parent then
+				HatsInUse[Handle] = { Part1, Value[5] or CFrame.identity }
+			end
+		end)
+	end
+
+	for Index, Data in Hats do
+		for _, Info in Data do
+			local Accessory = FindAccessory(Character, Info.Texture, Info.Mesh, Info.Name)
+
+			ProcessAccessory(Accessory, function(Handle)
+				HatsInUse[Handle] = { FindFirstChild(FakeRig, Index), Info.Offset }
+			end)
+
+			if LimitHatsPerLimb then
+				continue
+			end
+		end
+	end
+
+	for _, Accessory in GetChildren(Character) do
+		if IsA(Accessory, "Accessory") then
+			ProcessAccessory(Accessory, function(Handle)
+				local FakeAccessory = RecreateAccessory(Accessory)
+				HatsInUse[Handle] = { GetFirstPart(FakeAccessory), CFrame.identity }
+			end)
+		end
+	end
+end
+
+local IsNetworkOwner = isnetworkowner or function(Part: Part)
+	return Part.ReceiveAge == 0 
+end
+
+local function GetRandomRadius() : Vector3
+	return Vector3.new(math.random(-TeleportOffsetRadius, TeleportOffsetRadius), 0.5, math.random(-TeleportOffsetRadius, TeleportOffsetRadius))
+end
+
+local function ArePlayersNearby() : boolean
+	local Output = nil
+
+	for _, Part in Workspace:GetPartBoundsInRadius(TeleportOffset, 10) do
+		local Model = Part.Parent
+
+		if IsA(Model, "Model") then
+			if FindFirstChildOfClass(Model, "Humanoid") and not (Model == Character and Model == FakeRig) then
+				Output = true
+			end
+		end
+	end
+
+	return Output
+end
+
+local function FlingModels() 
+	for _, Model in FlingableTargets do
+		local PrimaryPart = Model.PrimaryPart
+
+		if PrimaryPart then
+			for _ = 1, 16 do
+				RootPart.CFrame = CFrameNew(PrimaryPart.Position + PrimaryPart.AssemblyLinearVelocity * Player:GetNetworkPing() * 30)
+				RootPart.AssemblyLinearVelocity = Vector3New(16000, 16000, 16000)
+
+				if PrimaryPart.AssemblyAngularVelocity.Magnitude > 75 then
+					break
+				end
+			end
+		end
+	end
+
+	table.clear(FlingableTargets)
+end
+
+local function BringCharacter()
+	local Time = 0
+	
+	while WaitTime > Time do
+		if RootPart then
+			RootPart.AssemblyLinearVelocity = Vector3.zero
+			RootPart.AssemblyAngularVelocity = Vector3.zero
+			RootPart.CFrame = CFrame.new(TeleportOffset.X, NoBodyNearby and FallenPartsDestroyHeight or TeleportOffset.Y, TeleportOffset.Y)
+		end
+
+		Time += task.wait()
+	end
+end
+
+local function UpdateCameraCFrame() 
+	PreviousCameraCFrame = Camera.CFrame
+
+	RunService.PreRender:Wait()
+	Camera.CFrame = PreviousCameraCFrame
+end
+
+local function ChangeCameraSubject()
+	if Camera and Camera.CameraSubject ~= FakeHumanoid then
+		Camera.CameraSubject = FakeHumanoid
+		UpdateCameraCFrame()
+	end
+end
+
+local function OnPreRender() 
+	if Camera then
+		ChangeCameraSubject()
+
+		if Camera.CameraType ~= CamCustomType then
+			Camera.CameraSubject = CamCustomType
+		end
+	end
+	
+	if UserInputService.MouseBehavior == Enum.MouseBehavior.LockCenter then	
+		local Position = FakeRoot.Position
+		local CamLookVector = Camera.CFrame.LookVector
+		
+		FakeRoot.CFrame = CFrame.lookAt(Position, Position + Vector3.new(CamLookVector.X, 0, CamLookVector.Z))
+	end
+	
+	for Handle, Data in HatsInUse do
+		local Part1 = Data[1]
+		local Offset = Data[2]
+		
+		if IsNetworkOwner(Handle) then
+			local CFrameOffset = Part1.CFrame * Offset
+			Handle.CFrame = CFrameOffset + ReverseSleep
+		end
+	end
+end
+
+local function OnPostSimulation()
+	for Handle, Data in HatsInUse do
+		local Part1 = Data[1]
+		local Offset = Data[2]
+		
+		local Part1Magnitude = Part1.Size.Magnitude
+		local Part1Velocity = Part1.AssemblyLinearVelocity * Part1Magnitude
+		
+		local CalculatedVel = Part1Velocity * 2.275
+		local ClampedAxisY = math.clamp(Part1Velocity.Y, SafeYAxis, 512)	
+		
+		if IsNetworkOwner(Handle) then
+			local Velocity = Vector3.new(CalculatedVel.X, ClampedAxisY, CalculatedVel.Z)
+			local CFrameOffset = Part1.CFrame * Offset
+
+			Handle.AssemblyLinearVelocity = Velocity
+			Handle.AssemblyAngularVelocity = Part1.AssemblyAngularVelocity
+			Handle.CFrame = CFrameOffset + ReverseSleep
+		end
+	end
+	
+	if UserInputService.MouseBehavior == Enum.MouseBehavior.LockCenter then	
+		local Position = FakeRoot.Position
+		local CamLookVector = Camera.CFrame.LookVector --* 1
+		
+		FakeRoot.CFrame = CFrame.lookAt(Position, Position + Vector3.new(CamLookVector.X, 0, CamLookVector.Z))
+	end
+	
+	FakeHumanoid.Jump = Humanoid.Jump
+	Move(FakeHumanoid, Humanoid.MoveDirection)
+end
+
+local function OnPreSimulation() 
+	SetCore(StarterGui, "ResetButtonCallback", RespawnEvent)
+	ReverseSleep = Vector3.new(0.0075 * math.sin(os.clock() * 7), 0, 0.0065 * math.cos(os.clock() * 3))
+	SafeYAxis = 35 - 3 * math.sin(os.clock() * 10)
+
+	if SetSimulationRadius and CanCallSimRadius then
+		Player.SimulationRadius = 2147483647
+	end
+
+	for _, Part in Descendants do
+		if IsA(Part, "BasePart") then
+			Part.CanCollide = false
+			Part.CanTouch = false
+			Part.CanQuery = false
+		end
+	end
+
+	if NoCollisions then
+		for _, Part in FakeRigChildren do
+			if IsA(Part, "BasePart") then
+				Part.CanCollide = false
+				Part.CanTouch = false
+				Part.CanQuery = false
+			end
+		end
+	end
+	
+	if AntiVoiding then
+		if FakeRoot.Position.Y < FallenPartsDestroyHeight then
+			FakeRoot.CFrame = CFrameBackup
+			FakeRoot.AssemblyLinearVelocity = Vector3.zero
+			FakeRoot.AssemblyAngularVelocity = Vector3.zero
+		end
+	end
+end
+
+local function UponParentChange()
+	if not FakeRig:IsDescendantOf(Workspace) then
+		CancelScript()
+	end
+end
+
+table.insert(RBXSignals, RunService.PostSimulation:Connect(OnPostSimulation))
+table.insert(RBXSignals, RunService.PreSimulation:Connect(OnPreSimulation))
+table.insert(RBXSignals, RunService.PreRender:Connect(OnPreRender))
+table.insert(RBXSignals, RespawnEvent.Event:Connect(CancelScript))
+
+table.insert(RBXSignals, FakeRoot:GetPropertyChangedSignal("Parent"):Connect(UponParentChange))
+table.insert(RBXSignals, Camera:GetPropertyChangedSignal("CameraSubject"):Connect(ChangeCameraSubject))
+
+SetCoreGuiEnabled(StarterGui, Enum.CoreGuiType.Health, false)
+SetStateEnabled(Humanoid, Enum.HumanoidStateType.Seated, false)
+SetStateEnabled(Humanoid, Enum.HumanoidStateType.Dead, true)
+
+replicatesignal(Player.ConnectDiedSignalBackend)
+task.wait(Players.RespawnTime + 0.65)
+	
+if NoBodyNearby then
+	local Offset = RootPart.Position
+	RootPart.CFrame = CFrame.new(Offset.X, FallenPartsDestroyHeight, Offset.Y)
+	task.wait(0.175)
+end
+	
+ChangeState(Humanoid, Enum.HumanoidStateType.Dead)
+task.wait(0.175)
+
+SetUpHatConfig()
+FakeRigChildren = GetChildren(FakeRig)
+Character.Parent = FakeRig
+Player.Character = FakeRig
+
+end)
+Reanimate:MakeToggle("Permanent Death", function(Bool)
+	Global.GelatekHubConfig["Permanent Death"] = Bool
+end)
+Reanimate:MakeToggle("Torso Fling", function(Bool)
+	Global.GelatekHubConfig["Torso Fling"] = Bool
+end)
+Reanimate:MakeToggle("Bullet Enabled", function(Bool)
+	Global.GelatekHubConfig["Bullet Enabled"] = Bool
+end)
+Reanimate:MakeToggle("Enable Collisions", function(Bool)
+	Global.GelatekHubConfig["Enable Collisions"] = Bool
+end)
+Reanimate:MakeToggle("Keep Hats On Head", function(Bool)
+	Global.GelatekHubConfig["Keep Hats On Head"] = Bool
+end)
+Reanimate:MakeToggle("Headless On Perma", function(Bool)
+	Global.GelatekHubConfig["Headless On Perma"] = Bool
+end)
+Reanimate:MakeToggle("Anti Void", function(Bool)
+	Global.GelatekHubConfig["Anti Void"] = Bool
+end)
+Reanimate:MakeSlider("Anti Void Offset", 75, 200, function(Value)
+	Global.GelatekHubConfig["Anti Void Offset"] = Value
+end)
+FreeScripts:MakeButton(" - [ Stop Script ] - ", BetterStopScript)
+HatScripts:MakeButton(" - [ Stop Script ] - ", BetterStopScript)
+Animations:MakeButton(" - [ Stop Animation ] - ", BetterStopScript)
+do -- [[ Animations ]] --
+	Animations:MakeTextBox("Custom Anim", function(Text)
+		PlayAnimation(Text)
+	end)
+	Animations:MakeButton("Freestylin'", function()
+		PlayAnimation(4432024917, "GelatekHub/Animations/Freestylin.mp3")
+	end)
+	Animations:MakeButton("Floss", function()
+		PlayAnimation(4812941481, "GelatekHub/Animations/Floss.mp3")
+	end)
+	Animations:MakeButton("Smooth Moves", function()
+		PlayAnimation(4900539662, "GelatekHub/Animations/Smooth Moves.mp3")
+	end)
+	Animations:MakeButton("Aerostepping", function()
+		PlayAnimation(4776588732, "GelatekHub/Animations/Aerostepping.mp3")
+	end)
+	Animations:MakeButton("Electro Swing", function()
+		PlayAnimation(3485013176, "GelatekHub/Animations/Electro Swing.mp3")
+	end)
+	Animations:MakeButton("Minecraft Parrot", function()
+		PlayAnimation(4300228160, "GelatekHub/Animations/Parrot.mp3")
+	end)
+	Animations:MakeButton("CaramellDansen", function()
+		PlayAnimation(6607554805, "GelatekHub/Animations/CaramellDansen.mp3")
+	end)
+	Animations:MakeButton("Breakdown", function()
+		PlayAnimation(4558409610, "GelatekHub/Animations/Breakdown.mp3")
+	end)
+	Animations:MakeButton("Orange Justice", function()
+		PlayAnimation(3262592866, "GelatekHub/Animations/Orange Justice.mp3")
+	end)
+	Animations:MakeButton("Smug", function()
+		PlayAnimation(3450125501, "GelatekHub/Animations/Smug.mp3")
+	end)
+	Animations:MakeButton("Crabby", function()
+		PlayAnimation(3643129020, "GelatekHub/Animations/Crabby.mp3")
+	end)
+	Animations:MakeButton("Conga", function()
+		PlayAnimation(4572096542, "GelatekHub/Animations/Conga.mp3")
+	end)
+	Animations:MakeButton("Dream Feet", function()
+		PlayAnimation(4300218011, "GelatekHub/Animations/Dream Feet.mp3")
+	end)
+	Animations:MakeButton("Kazotsky Kick", function()
+		PlayAnimation(4846209506)
+	end)
+	Animations:MakeButton("Radical", function()
+		PlayAnimation(4686555525)
+	end)
+	Animations:MakeButton("Take The L", function()
+		PlayAnimation(4827299133, "GelatekHub/Animations/Take The L.mp3")
+	end)
+	Animations:MakeButton("Laughing", function()
+		PlayAnimation(4846000379, "GelatekHub/Animations/Laughing.mp3")
+	end)
+	Animations:MakeButton("Drip", function()
+		PlayAnimation(4959380041, "GelatekHub/Animations/Drip.mp3")
+	end)
+	Animations:MakeButton("Pushups", function()
+		PlayAnimation(4966881089)
+	end)
+end
+
+do -- [[ Scripts ]] --
+	HatScripts:MakeButton("Dual Ultima", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/DualUltima.lua"))()
+	end)
+	HatScripts:MakeButton("The Hotline", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/TheHotline.lua"))()
+	end)
+	HatScripts:MakeButton("Attack Rifle", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/AttackRifle.lua"))()
+	end)
+	HatScripts:MakeButton("Carnage", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/TheCarnage.lua"))()
+	end)
+	HatScripts:MakeButton("Neptunian V", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/NeptunianV.lua"))()
+	end)
+	HatScripts:MakeButton("Zenith Battle Rifle-70", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/ZenithAttackRifle.lua"))()
+	end)
+	HatScripts:MakeButton("Chips", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/TheChips.lua"))()
+	end)
+	HatScripts:MakeButton("Void Scythe", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/VoidScythe.lua"))()
+	end)
+	HatScripts:MakeButton("Blue-Black Sniper", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/TheSniper.lua"))()
+	end)
+	HatScripts:MakeButton("Banzai Bazooka", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/BanzaiBazooka.lua"))()
+	end)
+	HatScripts:MakeButton("Voodoo Doll", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/VoodooDoll.lua"))()
+	end)
+	HatScripts:MakeButton("Quenox", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/Quenox.lua"))()
+	end)
+	HatScripts:MakeButton("Goner", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/Goner.lua"))()
+	end)
+	HatScripts:MakeButton("[BUGS] Lightning Cannon V4", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/LightningCannon.lua"))()
+	end)
+	
+	FreeScripts:MakeButton("Gale Fighter", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/GaleFighter.lua"))()
+	end)
+	FreeScripts:MakeButton("Ender.", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/Ender.lua"))()
+	end)
+	FreeScripts:MakeButton("Cadacus.", function()
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Gelatekussy/GelatekHub/main/src/scripts/Cadacus.lua"))()
+	end)
+end
+
+do -- [[ Hats ]] --
+	Hats:MakeButton("Copy R6 Bullet Hat", function()
+		setclipboard("48474313")
+	end)
+	Hats:MakeButton("Copy R15 Bullet Hat", function()
+		setclipboard("5973840187")
+	end)
+	Hats:MakeButton("Copy Dual Ultima Hats", function()
+		setclipboard("4524991457,4820152700")
+	end)
+	Hats:MakeButton("Copy The Hotline Hat", function()
+		setclipboard("4962455546")
+	end)
+	Hats:MakeButton("Copy Attack Rifle Hat", function()
+		setclipboard("6202087882")
+	end)
+	Hats:MakeButton("Copy Carnage Hats", function()
+		setclipboard("5134896593,5410674378")
+	end)
+	Hats:MakeButton("Copy Neptunian V Hat", function()
+		setclipboard("4506945409")
+	end)
+	Hats:MakeButton("Copy Zenith Rifle Hats", function()
+		setclipboard("4962510729,4962455546")
+	end)
+	Hats:MakeButton("Copy Chips Hat", function()
+		setclipboard("4964938812")
+	end)
+	Hats:MakeButton("Copy Blue-Black Sniper Hat", function()
+		setclipboard("5063578607")
+	end)
+	Hats:MakeButton("Copy Void Scythe Hat", function()
+		setclipboard("5414429551")
+	end)
+	Hats:MakeButton("Copy Banzai Bazooka Hat", function()
+		setclipboard("4466171123")
+	end)
+	Hats:MakeButton("Copy Voodoo Doll Hats", function()
+		setclipboard("7218265043,7170689370")
+	end)
+	Hats:MakeButton("Copy Quenox Hats", function()
+		setclipboard("4820152700,4794315940,4524991457,4315489767,4458601937,4506945409")
+	end)
+	Hats:MakeButton("Copy Goner Hat", function()
+		setclipboard("6869866014")
+	end)
+	Hats:MakeButton("Copy Lightning Cannon V4 Hat", function()
+		setclipboard("4623059912")
+	end)
+end
+
+do -- [[ Credits ]] --
+	Credits:MakeLabel("Gui: Gelatek")
+	Credits:MakeLabel("Reanimate: Gelatek")
+	Credits:MakeLabel("Anim ID Player: Gelatek / Derek")
+	Credits:MakeLabel("Converts: Gelatek / Emper")
+end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+local null = Main:MakeTab(" ")
+null:MakeTextBox("funny", function(value)
+	if value == "kylesweep" then
+		local screengui = Instance.new("ScreenGui")
+		screengui.Parent = game:GetService("CoreGui")
+		local r = math.random
+		local function MiniRandom()
+			local ABC0, ABC1 = r(1, 8), r(1, 9)
+			return "0." .. ABC0 .. ABC1
+		end
+		for i = 0, 45 do
+		local image = Instance.new("ImageLabel", screengui)
+		image.Position = UDim2.new(MiniRandom(),0,1,0)
+		image.Size = UDim2.new(0,150,0,150)
+		image.BackgroundTransparency = 1
+		image.Image = "http://www.roblox.com/asset/?id=8300658383"
+		image.BackgroundColor3 = Color3.fromRGB(255,255,255)
+		local function rotation(Object, Property)
+			local Tween = game:GetService("TweenService"):Create(Object, TweenInfo.new(Property["Time"]), {Rotation= Property["Rotation"]}):Play()
+			return Tween
+		end
+		rotation(image, {
+			["Time"] = 1.5,
+			["Rotation"] = math.random(-180,180)
+		})
+		local function returning()
+			image:TweenPosition( image.Position + UDim2.new(0,0,0.6,0), Enum.EasingDirection.In, Enum.EasingStyle.Quad, 0.4 )
+		end
+
+		image:TweenPosition( image.Position - UDim2.new(0,0,0.6,0), Enum.EasingDirection.InOut, Enum.EasingStyle.Quad, 0.4, false, returning)
+		task.wait(0.05)
+		end
+		task.wait(5)
+		screengui:Destroy()
+	end
+	if value == "nullwarehub" then
+		if isfile and isfolder and writefile and (getsynasset or getcustomasset) then
+			local getsynasset = getsynasset or getcustomasset or function() warn("no getcustomasset/getsynasset") end
+			if not isfile("nw.png") then
+				writefile("nw.png", game:HttpGet("https://github.com/Gelatekussy/GelatekHub/blob/main/image%5B1%5D.png?raw=true"))
+			end
+			if not isfile("jp.mp3") then
+				writefile("jp.mp3", game:HttpGet("https://github.com/Gelatekussy/GelatekHubSongs/blob/main/ttsMP3.com_VoiceText_2022-11-30_20%2016%2026.mp3?raw=true"))
+			end
+			if not isfile("scream.mp3") then
+				writefile("scream.mp3", game:HttpGet("https://github.com/Gelatekussy/GelatekHubSongs/blob/main/scream.mp3?raw=true"))
+			end
+
+			local screengui = Instance.new("ScreenGui")
+			screengui.Parent = game:GetService("CoreGui")
+
+			local sound = Instance.new("Sound")
+			sound.SoundId = getsynasset("jp.mp3")
+			sound.Volume = 3
+			sound:Play()
+			sound.Parent = screengui
+
+			task.spawn(function()
+				task.wait(1.5)
+				sound.SoundId = getsynasset("scream.mp3")
+				sound.Volume = 10
+				sound:Play()
+			end)
+
+			local image = Instance.new("ImageLabel", screengui)
+			image.Position = UDim2.new(0.5,0,0.5,0)
+			image.AnchorPoint = Vector2.new(0.5,0.5)
+			image.Size = UDim2.new(0.2,0,0.2,0)
+			image.BackgroundTransparency = 1
+			image.Image = getsynasset("nw.png")
+			image.BackgroundColor3 = Color3.fromRGB(255,255,255)
+			task.wait(0.2)
+			image:TweenSize(UDim2.new(1.5,0,1.5,0))
+			task.wait(5)
+			screengui:Destroy()
+		end
+	end
+end)
+
+print("GelatekHub Loaded!")
