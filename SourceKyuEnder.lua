@@ -1,7 +1,7 @@
 title = "\n//    E N D E R \228\185\157    //\n\nMade by @Kyutatsuki#9221\n\n[CTRL] Walk\n[H] Open/Close Help GUI\n\nEnder but Kyu's version AKA \"Ender v4\"\nWas \"requested\" by Creterisk\n\nBuild 0001\n"
 backgroundcolortitle = Color3.fromRGB(27, 42, 53)
 bordercolortitle = Color3.fromHSV(0, 0, 0)
-local p = game:GetService("Players"):WaitForChild(name)
+local p = game:GetService("Players").LocalPlayer
 local char = p.Character
 local larm = char:WaitForChild("Left Arm")
 local rarm = char:WaitForChild("Right Arm")
