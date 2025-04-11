@@ -1,3 +1,45 @@
+title = "\n//    E N D E R \228\185\157    //\n\nMade by @Kyutatsuki#9221\n\n[CTRL] Walk\n[H] Open/Close Help GUI\n\nEnder but Kyu's version AKA \"Ender v4\"\nWas \"requested\" by Creterisk\n\nBuild with passion ;)\n"
+
+backgroundcolortitle = Color3.fromRGB(27, 42, 53)
+bordercolortitle = Color3.fromHSV(0, 0, 0)
+
+-- Используем LocalPlayer и проверяем наличие персонажа
+local p = game:GetService("Players").LocalPlayer
+local char = p.Character or p.CharacterAdded:Wait()
+
+if not char then
+    error("Персонаж LocalPlayer отсутствует!")
+end
+
+-- Проверяем наличие частей персонажа
+local larm = char:FindFirstChild("Left Arm")
+local rarm = char:FindFirstChild("Right Arm")
+local lleg = char:FindFirstChild("Left Leg")
+local rleg = char:FindFirstChild("Right Leg")
+local hed = char:FindFirstChild("Head")
+local torso = char:FindFirstChild("Torso")
+local root = char:FindFirstChild("HumanoidRootPart")
+
+if not (larm and rarm and lleg and rleg and hed and torso and root) then
+    error("Некоторые части персонажа отсутствуют!")
+end
+
+-- Проверяем наличие FullScreenFrame
+local coreGui = game:GetService("CoreGui")
+local topBarApp = coreGui:FindFirstChild("TopBarApp")
+
+if not topBarApp then
+    warn("TopBarApp не найден в CoreGui!")
+else
+    local fullScreenFrame = topBarApp:FindFirstChild("FullScreenFrame")
+    if not fullScreenFrame then
+        warn("FullScreenFrame не найден в TopBarApp!")
+    end
+end
+
+-- Остальная часть кода остаётся без изменений
+print("Скрипт успешно загружен и инициализирован.")
+
 title = "\n//    E N D E R \228\185\157    //\n\nMade by @Kyutatsuki#9221\n\n[CTRL] Walk\n[H] Open/Close Help GUI\n\nEnder but Kyu's version AKA \"Ender v4\"\nWas \"requested\" by Creterisk\n\nBuild 0001\n"
 backgroundcolortitle = Color3.fromRGB(27, 42, 53)
 bordercolortitle = Color3.fromHSV(0, 0, 0)
