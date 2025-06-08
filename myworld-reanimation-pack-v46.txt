@@ -1,4 +1,4 @@
---loadstring(game:HttpGet(""))()
+--loadstring(game:HttpGet("https://raw.githubusercontent.com/Farhat-Quanysh/RobloxXploit_stuffs/refs/heads/main/myworld-reanimation-pack-v46.txt"))()
 
 --[[
 	patchma hub by MyWorld
