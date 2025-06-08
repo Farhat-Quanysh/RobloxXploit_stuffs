@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Farhat-Quanysh/RobloxXploit_stuffs/refs/heads/main/TEST-bring.lua"))()
 local uis = game:GetService("UserInputService")
 local cg = game:GetService("CoreGui")
 local p = game:GetService("Players")
