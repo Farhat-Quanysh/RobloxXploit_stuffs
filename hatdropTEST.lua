@@ -10,21 +10,11 @@ local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild
 local shp = sethiddenproperty
 local rep = replicatesignal
 
-if not torso then
-    warn("Torso not found, aborting")
-    return
-end
-
 local allhats = {}
 for _, v in pairs(character:GetChildren()) do
     if v:IsA("Accessory") then
         table.insert(allhats, v)
     end
-end
-
-if #allhats == 0 then
-    warn("No hats found, aborting")
-    return
 end
 
 local function updatestate(hat, state)
@@ -109,11 +99,9 @@ local function dropHats(selectedHats)
 end
 
 local function permanentDeath()
-    local function kill()
-        rep(Player.Kill)
-        task.wait(Players.RespawnTime + 0.15)
-    end    
-    kill()
+    rep(Player.ConnectDiedSignalBackend)
+    task.wait(Players.RespawnTime + .15)
+    rep(Player.Kill)
 end
 
 -- Взлом SimulationRadius и Network Ownership
