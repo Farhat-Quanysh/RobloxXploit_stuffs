@@ -2,10 +2,13 @@
 -- credits to shownape
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
+local RunService = game:GetService("RunService")
 local character = Player.Character or Player.CharacterAdded:Wait()
 local humanoid = character:WaitForChild("Humanoid")
 local hrp = character:WaitForChild("HumanoidRootPart")
 local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
+local shp = sethiddenproperty
+local rep = replicatesignal
 
 if not torso then
     warn("Torso not found, aborting")
@@ -26,7 +29,7 @@ end
 
 local function updatestate(hat, state)
     local success, err = pcall(function()
-        sethiddenproperty(hat, "BackendAccoutrementState", state)
+        shp(hat, "BackendAccoutrementState", state)
     end)
     if not success then
         setscriptable(hat, "BackendAccoutrementState", true)
@@ -64,7 +67,7 @@ local function dropHats(selectedHats)
         play(180436148, 1, 5, 1).TimePosition = 0.1
     end
     local connection
-    connection = game:GetService("RunService").Heartbeat:Connect(function()
+    connection = RunService.Heartbeat:Connect(function()
         if not hrp.Parent then
             connection:Disconnect()
             return
@@ -107,7 +110,7 @@ end
 
 local function permanentDeath()
     local function kill()
-        replicatesignal(Player.Kill)
+        rep(Player.Kill)
     end
     Player.CharacterAdded:Connect(function(char)
         task.wait(Players.RespawnTime + 0.15)
@@ -116,5 +119,24 @@ local function permanentDeath()
     kill()
 end
 
+-- Взлом SimulationRadius и Network Ownership
+shp(Player, "ReplicationFocus", workspace)
+RunService.Heartbeat:Connect(function()
+    local char = Player.Character
+    if char then
+        shp(Player, "SimulationRadius", math.huge)
+        rep(Player.SimulationRadiusChanged, math.huge)
+        for _, v in ipairs(char:GetDescendants()) do
+            if v:IsA("BasePart") then
+                shp(v, "RootPriority", 1e9)
+                shp(v, "PhysicsReplicationOwnership", 1)
+                shp(v, "NetworkIsSleeping", false)
+                rep(v.NetworkOwnerChanged, Player)
+            end
+        end
+    end
+end)
+
+-- Запуск функций
 dropHats()
 permanentDeath()
