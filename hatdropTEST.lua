@@ -111,11 +111,8 @@ end
 local function permanentDeath()
     local function kill()
         rep(Player.Kill)
-    end
-    Player.CharacterAdded:Connect(function(char)
         task.wait(Players.RespawnTime + 0.15)
-        kill()
-    end)
+    end    
     kill()
 end
 
