@@ -1,114 +1,118 @@
 -- loadstring(game:HttpGet("https://raw.githubusercontent.com/Farhat-Quanysh/RobloxXploit_stuffs/refs/heads/main/hatdropTEST.lua"))()
-local Players = game:GetService("Players")
-local Player = Players.LocalPlayer
-local character = Player.Character or Player.CharacterAdded:Wait()
-local humanoid = character:WaitForChild("Humanoid")
+-- credits to shownape
+local fph = workspace.FallenPartsDestroyHeight
+
+local plr = game.Players.LocalPlayer
+local character = plr.Character
 local hrp = character:WaitForChild("HumanoidRootPart")
 local torso = character:FindFirstChild("UpperTorso") or character:FindFirstChild("Torso")
 
-local allhats = {}
-for _, v in pairs(character:GetChildren()) do
-    if v:IsA("Accessory") then
-        table.insert(allhats, v)
-    end
-end
-
-if #allhats == 0 then
-    warn("No hats found, aborting")
-    return
-end
-
-local function updatestate(hat, state)
-    local success, err = pcall(function()
-        sethiddenproperty(hat, "BackendAccoutrementState", state)
-    end)
-    if not success then
-        setscriptable(hat, "BackendAccoutrementState", true)
+local function updatestate(hat,state)
+    if sethiddenproperty then
+        sethiddenproperty(hat,"BackendAccoutrementState",state)
+    elseif setscriptable then
+        setscriptable(hat,"BackendAccoutrementState",true)
         hat.BackendAccoutrementState = state
+    else
+        local success = pcall(function()
+            hat.BackendAccoutrementState = state
+        end)
+        if not success then
+            error("executor not supported, sorry!")
+        end
     end
 end
 
-local function play(id, speed, prio, weight)
-    speed = speed or 1
-    prio = prio or 5
-    weight = weight or 1
-    local anim = Instance.new("Animation")
-    anim.AnimationId = "rbxassetid://" .. tostring(id)
-    local track = humanoid:LoadAnimation(anim)
+local allhats = {}
+for i,v in pairs(character:GetChildren()) do
+    if v:IsA("Accessory") then
+        table.insert(allhats,v)
+    end
+end
+
+local locks = {}
+for i,v in pairs(allhats) do
+    table.insert(locks,v.Changed:Connect(function(p)
+        if p == "BackendAccoutrementState" then
+            updatestate(v,0)
+        end
+    end))
+    updatestate(v,2)
+end
+
+workspace.FallenPartsDestroyHeight = 0/0
+
+local function play(id,speed,prio,weight)
+    local Anim = Instance.new("Animation")
+    Anim.AnimationId = "https"..tostring(math.random(1000000,9999999)).."="..tostring(id)
+    local track = character.Humanoid:LoadAnimation(Anim)
     track.Priority = prio
     track:Play()
     track:AdjustSpeed(speed)
     track:AdjustWeight(weight)
-    track.TimePosition = 0.1
     return track
 end
 
-local function dropHats(selectedHats)
-    selectedHats = selectedHats or allhats
-    for _, hat in pairs(selectedHats) do
-        updatestate(hat, 2)
-    end
-    local fph = workspace.FallenPartsDestroyHeight
-    workspace.FallenPartsDestroyHeight = 0/0
-    local dropcf = CFrame.new(hrp.Position.x, fph - 0.25, hrp.Position.z)
-    if humanoid.RigType == Enum.HumanoidRigType.R15 then
-        dropcf = dropcf * CFrame.Angles(math.rad(20), 0, 0)
-        play(507767968, 1, 5, 1).TimePosition = 0.1
-    else
-        play(180436148, 1, 5, 1).TimePosition = 0.1
-    end
-    local connection
-    connection = game:GetService("RunService").Heartbeat:Connect(function()
-        if not hrp.Parent then
-            connection:Disconnect()
-            return
-        end
+local r6fall = 180436148
+local r15fall = 507767968
+
+local dropcf = CFrame.new(character.HumanoidRootPart.Position.x,fph-.25,character.HumanoidRootPart.Position.z)
+if character.Humanoid.RigType == Enum.HumanoidRigType.R15 then
+    dropcf =  dropcf * CFrame.Angles(math.rad(20),0,0)
+    character.Humanoid:ChangeState(16)
+    play(r15fall,1,5,1).TimePosition = .1
+else
+    play(r6fall,1,5,1).TimePosition = .1
+end
+
+spawn(function()
+    while hrp.Parent ~= nil do
         hrp.CFrame = dropcf
-        hrp.Velocity = Vector3.new(0, 25, 0)
-        hrp.RotVelocity = Vector3.new(0, 0, 0)
-    end)
-    task.wait(0.25)
-    humanoid:ChangeState(15)
-    torso.AncestryChanged:Wait()
-    connection:Disconnect()
-    for _, hat in pairs(selectedHats) do
-        updatestate(hat, 4)
+        hrp.Velocity = Vector3.new(0,25,0) -- 10 is the original for r6
+        hrp.RotVelocity = Vector3.new(0,0,0)
+        game:GetService("RunService").Heartbeat:wait()
     end
-    local dropped = false
-    repeat
-        local foundhandle = false
-        for _, hat in pairs(selectedHats) do
-            if hat:FindFirstChild("Handle") then
-                foundhandle = true
-                if hat.Handle.CanCollide then
-                    dropped = true
-                    break
-                end
+end)
+
+task.wait(.25)
+character.Humanoid:ChangeState(15)
+torso.AncestryChanged:wait()
+
+for i,v in pairs(locks) do
+    v:Disconnect()
+end
+for i,v in pairs(allhats) do
+    updatestate(v,4)
+end
+
+local dropped = false
+repeat
+    local foundhandle = false
+    for i,v in pairs(allhats) do
+        if v:FindFirstChild("Handle") then
+            foundhandle = true
+            if v.Handle.CanCollide then
+                dropped = true
+                break
             end
         end
-        if not foundhandle then
-            break
-        end
-        task.wait()
-    until not character.Parent or dropped
-    workspace.FallenPartsDestroyHeight = fph
-    if dropped then
-        print("dropped")
-    else
-        print("failed to drop")
     end
+    if not foundhandle then
+        break
+    end
+    task.wait()
+until plr.Character ~= character or dropped
+
+if dropped then
+    print("dropped")
+    local Players = game:GetService("Players")
+    local Player = Players.LocalPlayer
+
+    replicatesignal(Player.ConnectDiedSignalBackend)
+    task.wait(Players.RespawnTime + .15)
+    replicatesignal(Player.Kill)
+else
+    print("failed to drop")
 end
 
-local function permanentDeath()
-    local function kill()
-        replicatesignal(Player.Kill) 
-    end
-    Player.CharacterAdded:Connect(function(char)
-        task.wait(Players.RespawnTime + 0.15)
-        kill() 
-    end)
-    kill() 
-end
-
-dropHats()
-permanentDeath()
+workspace.FallenPartsDestroyHeight = fph
