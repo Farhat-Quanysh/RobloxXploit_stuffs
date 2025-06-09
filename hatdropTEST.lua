@@ -1,3 +1,4 @@
+-- loadstring(game:HttpGet("https://raw.githubusercontent.com/Farhat-Quanysh/RobloxXploit_stuffs/refs/heads/main/hatdropTEST.lua"))()
 local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local character = Player.Character or Player.CharacterAdded:Wait()
